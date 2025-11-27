@@ -1,0 +1,87 @@
+import React, { useState, useEffect } from 'react';
+import profile from '../../data/profile';
+import { navigationIcons, socialIcons } from '../../data/icons';
+import IconHolder from '../common/IconHolder';
+import { scrollToSection } from '../../utils/scrollUtils';
+import '../../assets/styles/components/layout/header.css';
+
+const Header = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const handleLinkClick = (e) => {
+        e.preventDefault();
+        const href = e.currentTarget.getAttribute('href');
+        const elementId = href.replace('#', '');
+        scrollToSection(elementId);
+    };
+
+    return (
+        <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+            <nav className="nav">
+                <div className="nav-brand">{profile.name}</div>
+
+                <ul className="nav-links">
+                    <li>
+                        <a href="#home" onClick={handleLinkClick}>
+                            <IconHolder
+                                icon={navigationIcons.home}
+                                size="small"
+                                className="nav-icon-holder"
+                            />
+                            Home
+                        </a>
+                    </li>
+
+                    <li className="dropdown">
+                        <a href="#about" onClick={handleLinkClick}>
+                            <IconHolder
+                                icon={navigationIcons.about}
+                                size="small"
+                                className="nav-icon-holder"
+                            />
+                            About
+                        </a>
+                        <ul className="dropdown-menu">
+                            <li><a href="#about-me" onClick={handleLinkClick}>About Me</a></li>
+                            <li><a href="#skills" onClick={handleLinkClick}>Skills</a></li>
+                            <li><a href="#experience" onClick={handleLinkClick}>Experience & Education</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#projects" onClick={handleLinkClick}>
+                            <IconHolder
+                                icon={navigationIcons.projects}
+                                size="small"
+                                className="nav-icon-holder"
+                            />
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact" onClick={handleLinkClick}>
+                            <IconHolder
+                                icon={navigationIcons.contact}
+                                size="small"
+                                className="nav-icon-holder"
+                            />
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    );
+};
+
+export default Header;
