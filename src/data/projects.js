@@ -10,12 +10,12 @@ export const projectsData = [
     },
     {
         id: 2,
-        title: "Coming Soon",
-        description: "Coming Soon",
+        title: "Ecosystem Simulator",
+        description: "A simple Ecosystem Simulator made in Java.",
         image: null,
-        technologies: ["Coming Soon"],
+        technologies: ["Java"],
         demoLink: null,
-        codeLink: null
+        codeLink: "https://github.com/ThisDudeMe/Portfolio_EcosystemProject"
     },
     {
         id: 3,
